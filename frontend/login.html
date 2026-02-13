@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Log in — Paper Link</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <h1><a href="/">Paper Link</a></h1>
+      <nav id="main-nav"></nav>
+    </header>
+    <main class="main narrow">
+      <h2>Log in</h2>
+      <form id="login-form" class="form">
+        <label for="li-username">Username</label>
+        <input id="li-username" name="username" type="text" required autocomplete="username" />
+        <label for="li-password">Password</label>
+        <input id="li-password" name="password" type="password" required autocomplete="current-password" />
+        <p id="login-error" class="form-error" hidden></p>
+        <button type="submit" class="btn btn-primary">Log in</button>
+      </form>
+      <p class="form-footer">Don't have an account? <a href="/signup.html">Sign up</a></p>
+    </main>
+  </div>
+  <script src="/js/auth.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    (function () {
+      PaperLink.initNav();
+      var form = document.getElementById("login-form");
+      var errEl = document.getElementById("login-error");
+      var next = new URLSearchParams(window.location.search).get("next") || "/";
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        errEl.hidden = true;
+        var u = form.username.value.trim();
+        var p = form.password.value;
+        if (!u || !p) { errEl.textContent = "Username and password required."; errEl.hidden = false; return; }
+        PaperApi.login(u, p).then(function (res) {
+          PaperAuth.setToken(res.token);
+          PaperAuth.setUsername(res.username);
+          window.location.href = next;
+        }).catch(function (err) {
+          errEl.textContent = err.message || "Log in failed.";
+          errEl.hidden = false;
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

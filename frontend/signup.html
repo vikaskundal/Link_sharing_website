@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign up — Paper Link</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <h1><a href="/">Paper Link</a></h1>
+      <nav id="main-nav"></nav>
+    </header>
+    <main class="main narrow">
+      <h2>Sign up</h2>
+      <form id="signup-form" class="form">
+        <label for="su-username">Username</label>
+        <input id="su-username" name="username" type="text" required autocomplete="username" />
+        <label for="su-password">Password</label>
+        <input id="su-password" name="password" type="password" required autocomplete="new-password" />
+        <p id="signup-error" class="form-error" hidden></p>
+        <button type="submit" class="btn btn-primary">Sign up</button>
+      </form>
+      <p class="form-footer">Already have an account? <a href="/login.html">Log in</a></p>
+    </main>
+  </div>
+  <script src="/js/auth.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    (function () {
+      PaperLink.initNav();
+      var form = document.getElementById("signup-form");
+      var errEl = document.getElementById("signup-error");
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        errEl.hidden = true;
+        var u = form.username.value.trim();
+        var p = form.password.value;
+        if (!u || !p) { errEl.textContent = "Username and password required."; errEl.hidden = false; return; }
+        PaperApi.signup(u, p).then(function (res) {
+          PaperAuth.setToken(res.token);
+          PaperAuth.setUsername(res.username);
+          window.location.href = "/";
+        }).catch(function (err) {
+          errEl.textContent = err.message || "Sign up failed.";
+          errEl.hidden = false;
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

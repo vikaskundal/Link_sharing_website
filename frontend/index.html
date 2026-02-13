@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paper Link — Link sharing for paper enthusiasts</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <h1><a href="/">Paper Link</a></h1>
+      <nav id="main-nav"></nav>
+    </header>
+    <main class="main">
+      <div class="sort-tabs">
+        <button type="button" class="btn btn-tab active" data-sort="recent">Most Recent</button>
+        <button type="button" class="btn btn-tab" data-sort="rated">Highest Rated</button>
+      </div>
+      <div id="links-loading" class="loading">Loading…</div>
+      <div id="links-list" class="links-list" hidden></div>
+      <div id="links-empty" class="empty" hidden>No links yet. <a href="/signup.html">Sign up</a> to add one!</div>
+      <div id="links-error" class="form-error" hidden></div>
+    </main>
+  </div>
+  <script src="/js/auth.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/index.js"></script>
+  <script>
+    PaperLink.initAddButton();
+  </script>
+</body>
+</html>
