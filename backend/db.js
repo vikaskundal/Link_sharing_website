@@ -1,5 +1,8 @@
 import { Client } from "https://deno.land/x/postgres@v0.17.0/mod.ts";
+import { load } from "https://deno.land/std@0.208.0/dotenv/mod.ts";
 import { config } from "./config.js";
+
+await load({ export: true });
 
 var client = null;
 
@@ -31,12 +34,21 @@ function convertBigInts(obj) {
 
 export async function getClient() {
   if (client === null) {
-    client = new Client(config.dbUrl);
+    var databaseUrl = Deno.env.get("DATA_BASE_URL") || config.dbUrl;
+    if (!databaseUrl) {
+      throw new Error(
+        "No database connection string found. Set DATA_BASE_URL in backend/.env"
+      );
+    }
+    client = new Client(databaseUrl);
     try {
       await client.connect();
     } catch (e) {
+      client = null;
       console.error("Database connection error:", e.message);
-      throw new Error("Failed to connect to database. Please check your database is running and the connection string is correct.");
+      throw new Error(
+        "Failed to connect to database. Please check your database is running and the connection string is correct."
+      );
     }
   }
   return client;
