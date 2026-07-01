@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Favourites — Paper Link</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <h1><a href="/">Paper Link</a></h1>
+      <nav id="main-nav"></nav>
+    </header>
+    <main class="main">
+      <h2>Your favourites</h2>
+      <p class="muted">Links you’ve rated positively.</p>
+      <div id="fav-loading" class="loading">Loading…</div>
+      <div id="fav-list" class="links-list" hidden></div>
+      <div id="fav-empty" class="empty" hidden>No favourites yet. Rate some links on the <a href="/">front page</a>!</div>
+      <div id="fav-error" class="form-error" hidden></div>
+    </main>
+  </div>
+  <script src="/js/auth.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/favourites.js"></script>
+  <script>
+    PaperLink.initAddButton();
+  </script>
+</body>
+</html>

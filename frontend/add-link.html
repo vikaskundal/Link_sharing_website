@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add link — Paper Link</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <h1><a href="/">Paper Link</a></h1>
+      <nav id="main-nav"></nav>
+    </header>
+    <main class="main narrow">
+      <h2>Add a link</h2>
+      <form id="add-link-form" class="form">
+        <label for="al-title">Title</label>
+        <input id="al-title" name="title" type="text" required />
+        <label for="al-desc">Description</label>
+        <textarea id="al-desc" name="description" rows="4" required></textarea>
+        <label for="al-url">Link URL</label>
+        <input id="al-url" name="url" type="url" placeholder="https://example.com" required />
+        <p id="add-link-error" class="form-error" hidden></p>
+        <p id="add-link-success" class="form-success" hidden></p>
+        <button type="submit" class="btn btn-primary">Post link</button>
+      </form>
+    </main>
+  </div>
+  <script src="/js/auth.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/add-link.js"></script>
+</body>
+</html>

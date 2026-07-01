@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hidden Links — Paper Link</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <h1><a href="/">Paper Link</a></h1>
+      <nav id="main-nav"></nav>
+    </header>
+    <main class="main">
+      <h2>Hidden links</h2>
+      <p class="muted">Links you've hidden from the front page.</p>
+      <div id="hidden-loading" class="loading">Loading…</div>
+      <div id="hidden-list" class="links-list" hidden></div>
+      <div id="hidden-empty" class="empty" hidden>No hidden links. Hide links on the <a href="/">front page</a> to see them here.</div>
+      <div id="hidden-error" class="form-error" hidden></div>
+    </main>
+  </div>
+  <script src="/js/auth.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/main.js"></script>
+  <script src="/js/hidden.js"></script>
+  <script>
+    PaperLink.initAddButton();
+  </script>
+</body>
+</html>
